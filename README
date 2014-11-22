@@ -1,0 +1,24 @@
+This repository contains mini scripts which help in increasing efficieny by reducing repetetive work and other Addons too.
+
+Directories are structured with respect to programming/script languages.
+
+|____RubyScripts # Contains Ruby Scripts
+|
+|____PythonScripts # Python Scripts
+|
+|____VimConf #Vim Configuration
+|
+|____TmuxConf #Tmux Configuration
+|
+|____ShellScripts # Shell Scripts
+| |
+| |____shortcuts.sh # Simple shortcuts for faster travel in console mode
+| |
+| |____extr.sh # Simple Extract utitlity for Console mode
+| |
+| |____256color.sh # Import 256 colors in Console
+| |
+| |____tree.sh # Tree command in shell script
+| 
+|____EmacsConf #Emacs Configuration
+
