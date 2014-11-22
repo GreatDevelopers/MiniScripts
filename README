@@ -9,6 +9,12 @@ Directories are structured with respect to programming/script languages.
 |____VimConf #Vim Configuration
 |
 |____TmuxConf #Tmux Configuration
+| 
+|____OpenboxConf #Openbox Window Manager Config
+| |
+| |____obconf
+| |
+| |____obmenu
 |
 |____ShellScripts # Shell Scripts
 | |

@@ -1,0 +1,9 @@
+syntax on
+set paste
+set cursorline
+set colorcolumn=80
+"set background=dark
+colorscheme inkpot
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
