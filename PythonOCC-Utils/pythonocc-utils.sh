@@ -12,4 +12,4 @@ cd pythonocc-utils
 # Installing PythonOCC-Utils 
 python setup.py install
 
-cp /usr/local/lib/python2.7/dist-packages/* /usr/lib/python2.7/dist-packages/
+cp -r /usr/local/lib/python2.7/dist-packages/OCCUtils /usr/lib/python2.7/dist-packages/
