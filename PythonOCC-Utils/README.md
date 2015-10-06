@@ -4,6 +4,7 @@ PythonOCC-Utils.sh file is written in bash shell. This script makes simple to in
     * git 
    
 # Installation of prerequirement:
+    $ sudo apt-get update
     $ sudo apt-get install git
 
 # Command to run this script:
