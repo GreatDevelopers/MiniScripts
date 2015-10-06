@@ -4,11 +4,11 @@ This script is written in bash shell. This script makes simple to install Python
    * git 
    * OCC
    
-# Installing git :
+# Installing git:
     $ sudo apt-get update
     $ sudo apt-get install git
     
-# Installing OCC :
+# Installing OCC:
    https://github.com/jmwright/pythonocc_oce_setup
 
 # Command to run this script:
