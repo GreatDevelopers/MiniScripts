@@ -3,7 +3,7 @@
 # Changing current directory to home directory 
 cd 
 
-# Installing pythonocc-utils 
+# Download pythonocc-utils 
 git clone https://github.com/tpaviot/pythonocc-utils.git
 
 # Changing home directory to PythonOCC-Utils directory
