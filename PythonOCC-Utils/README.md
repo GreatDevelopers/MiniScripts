@@ -8,5 +8,5 @@ PythonOCC-Utils.sh file is written in bash shell. This script makes simple to in
     $ sudo apt-get install git
 
 # Command to run this script:
-    4 sudo chmod 755 pythonocc-utils.sh
+    $ sudo chmod 755 pythonocc-utils.sh
     $ sudo ./pythonocc-utils.sh
