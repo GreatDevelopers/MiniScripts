@@ -25,6 +25,8 @@ Directories are structured with respect to programming/script languages.
 | |____256color.sh # Import 256 colors in Console
 | |
 | |____tree.sh # Tree command in shell script
+| |
+| |____JavaOnTermux.sh # To run Java program on Android in Termux
 | 
 |____EmacsConf #Emacs Configuration
 |
