@@ -1,4 +1,3 @@
-#!/$PREFIX/bin/sh
 # Take filename as commandline argument
 cmd_arg=$1
 
