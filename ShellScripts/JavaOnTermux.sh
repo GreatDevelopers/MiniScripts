@@ -15,6 +15,7 @@ then
 
 elif [ "$cmd_arg" == "install" ]
 then
+	apt update
 	apt install ecj4.6 dx
 else
 	echo "Script to run Java on Android in Termux"
