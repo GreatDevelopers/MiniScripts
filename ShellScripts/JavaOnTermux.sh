@@ -11,7 +11,7 @@ then
 	# Compile and Execute
 	ecj $file_name.java
 	dx --dex --output=$file_name.dex $file_name.class
-	dalvikvm -cp $file_name.dex $file_name
+	dalvikvm -cp $file_name.dex $file_name ${@:2}
 
 elif [ "$cmd_arg" == "install" ]
 then
