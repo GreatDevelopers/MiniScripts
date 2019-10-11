@@ -4,6 +4,18 @@ if(isset($_POST['submit'])) {
 	$check = getimagesize($_FILES["image"]["tmp_name"]);
 
 	if($check !== false){
+		// Check image size
+		if(($_FILES['image']['size'] >= $max_img_size) || ($_FILES["image"]["size"] == 0)) {
+			echo '<div class="alert alert-danger"><strong>Image file size too large!</strong> Image must be less than ' . $max_img_size/1000 . ' KB.</div>';
+			goto DataForm;
+		}
+
+		// Check document size
+		if(($_FILES['document']['size'] >= $max_doc_size) || ($_FILES["document"]["size"] == 0)) {
+			echo '<div class="alert alert-danger"><strong>Document file size too large!</strong> Document must be less than ' . $max_doc_size/1000 . ' KB.</div>';
+			goto DataForm;
+		}
+
 		$roll_no = $_POST['rollno'];
 		$name = rand() . $roll_no;
 		$img_ftype=str_replace("image/", "", $_FILES['image']['type']);
@@ -12,12 +24,14 @@ if(isset($_POST['submit'])) {
 
 		$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 		if($db->connect_error){
-			die("Connection failed: " . $db->connect_error);
+			echo '<div class="alert alert-danger"><strong>Something went wrong!</strong> Please try after some time or contact server-admin. </div>';
+			goto DataForm;
 		}
 
 		$dataTime = date("Y-m-d H:i:s");
 
 		$insert = $db->query("INSERT into client_data (rollno, image, document, created) VALUES (" . $roll_no . ", '" . $name . "." . $img_ftype . "', '" . $name . ".pdf', '" . $dataTime . "')");
+		// Store uploaded image and document file
 		move_uploaded_file($_FILES['image']['tmp_name'], $target_img_file);
 		move_uploaded_file($_FILES['document']['tmp_name'], $target_doc_file);
 
@@ -29,10 +43,10 @@ if(isset($_POST['submit'])) {
 	}
 	else{
 		echo '<div class="alert alert-Warning"><strong>Warning!</strong> Please select an image file to upload. </div>';
-		echo "Please select an image file to upload.";
 	}
 }
 
+DataForm:
 echo '<html>';
 
 echo '<head>';
