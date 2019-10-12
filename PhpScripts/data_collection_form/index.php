@@ -10,6 +10,18 @@ if(isset($_POST['submit'])) {
 			goto DataForm;
 		}
 
+		$image_width = getimagesize($_FILES["image"]["tmp_name"])[0];
+		$image_height = getimagesize($_FILES["image"]["tmp_name"])[1];
+		// Check image height and width constraints
+		if ($image_width < $min_img_width || $image_height < $min_img_height) {
+			echo '<div class="alert alert-danger"><strong>Image dimensions are too small!</strong> Minimum image size is ' . $min_img_width . ' &times; ' . $min_img_height . 'px. Uploaded image size is ' . $image_width . ' &times; ' . $image_height . '.px</div>';
+			goto DataForm;
+		}
+		elseif ($image_width > $max_img_width || $image_height > $max_img_height) {
+			echo '<div class="alert alert-danger"><strong>Image dimensions are too large!</strong> Maximum image size is ' . $max_img_width . ' &times; ' . $max_img_height . 'px. Uploaded image size is ' . $image_width . ' &times; ' . $image_height . '.px</div>';
+			goto DataForm;
+		}
+
 		// Check document size
 		if(($_FILES['document']['size'] >= $max_doc_size) || ($_FILES["document"]["size"] == 0)) {
 			echo '<div class="alert alert-danger"><strong>Document file size too large!</strong> Document must be less than ' . $max_doc_size/1000 . ' KB.</div>';
