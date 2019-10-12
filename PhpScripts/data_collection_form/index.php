@@ -51,16 +51,16 @@ echo '<html>';
 
 echo '<head>';
 echo '<!-- Latest compiled and minified CSS -->';
-echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">';
+echo '<link rel="stylesheet" href="bootstrap/bootstrap.min.css">';
 echo '';
 echo '<!-- jQuery library -->';
-echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>';
+echo '<script src="bootstrap/jquery.min.js"></script>';
 echo '';
 echo '<!-- Popper JS -->';
-echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>';
+echo '<script src="bootstrap/popper.min.js"></script>';
 echo '';
 echo '<!-- Latest compiled JavaScript -->';
-echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	';
+echo '<script src="bootstrap/bootstrap.min.js"></script>	';
 echo '</head>';
 
 echo '<body>';
