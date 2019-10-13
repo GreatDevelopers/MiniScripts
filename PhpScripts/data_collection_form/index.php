@@ -1,8 +1,12 @@
 <?php
 include("config.php");
 if(isset($_POST['submit'])) {
-	$check = getimagesize($_FILES["image"]["tmp_name"]);
+	if (getimagesize($_FILES["signature"]["tmp_name"]) == false) {
+		echo '<div class="alert alert-Warning"><strong>Warning!</strong> Please select a signature file to upload. </div>';
+		goto DataForm;
+	}
 
+	$check = getimagesize($_FILES["image"]["tmp_name"]);
 	if($check !== false){
 		// Check image size
 		if(($_FILES['image']['size'] >= $max_img_size) || ($_FILES["image"]["size"] == 0)) {
@@ -14,11 +18,23 @@ if(isset($_POST['submit'])) {
 		$image_height = getimagesize($_FILES["image"]["tmp_name"])[1];
 		// Check image height and width constraints
 		if ($image_width < $min_img_width || $image_height < $min_img_height) {
-			echo '<div class="alert alert-danger"><strong>Image dimensions are too small!</strong> Minimum image size is ' . $min_img_width . ' &times; ' . $min_img_height . 'px. Uploaded image size is ' . $image_width . ' &times; ' . $image_height . '.px</div>';
+			echo '<div class="alert alert-danger"><strong>Image dimensions are too small!</strong> Minimum image size is ' . $min_img_width . ' &times; ' . $min_img_height . 'px. Uploaded image size is ' . $image_width . ' &times; ' . $image_height . 'px.</div>';
 			goto DataForm;
 		}
 		elseif ($image_width > $max_img_width || $image_height > $max_img_height) {
-			echo '<div class="alert alert-danger"><strong>Image dimensions are too large!</strong> Maximum image size is ' . $max_img_width . ' &times; ' . $max_img_height . 'px. Uploaded image size is ' . $image_width . ' &times; ' . $image_height . '.px</div>';
+			echo '<div class="alert alert-danger"><strong>Image dimensions are too large!</strong> Maximum image size is ' . $max_img_width . ' &times; ' . $max_img_height . 'px. Uploaded image size is ' . $image_width . ' &times; ' . $image_height . 'px.</div>';
+			goto DataForm;
+		}
+
+		$signature_width = getimagesize($_FILES["signature"]["tmp_name"])[0];
+		$signature_height = getimagesize($_FILES["signature"]["tmp_name"])[1];
+		// Check signature height and width constraints
+		if ($signature_width < $min_signature_width || $signature_height < $min_signature_height) {
+			echo '<div class="alert alert-danger"><strong>Signature dimensions are too small!</strong> Minimum signature size is ' . $min_signature_width . ' &times; ' . $min_signature_height . 'px. Uploaded signature size is ' . $signature_width . ' &times; ' . $signature_height . 'px.</div>';
+			goto DataForm;
+		}
+		elseif ($signature_width > $max_img_width || $signature_height > $max_img_height) {
+			echo '<div class="alert alert-danger"><strong>Signature dimensions are too large!</strong> Maximum signature size is ' . $max_img_width . ' &times; ' . $max_img_height . 'px. Uploaded signature size is ' . $signature_width . ' &times; ' . $signature_height . 'px.</div>';
 			goto DataForm;
 		}
 
@@ -32,6 +48,8 @@ if(isset($_POST['submit'])) {
 		$name = rand() . $roll_no;
 		$img_ftype=str_replace("image/", "", $_FILES['image']['type']);
 		$target_img_file = $target_img_dir . $name . "." . $img_ftype;
+		$signature_ftype=str_replace("image/", "", $_FILES['signature']['type']);
+		$target_signature_file = $target_signature_dir . $name . "." . $signature_ftype;
 		$target_doc_file = $target_doc_dir . $name . ".pdf";
 
 		$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
@@ -42,12 +60,13 @@ if(isset($_POST['submit'])) {
 
 		$dataTime = date("Y-m-d H:i:s");
 
-		$insert = $db->query("INSERT into client_data (rollno, image, document, created) VALUES (" . $roll_no . ", '" . $name . "." . $img_ftype . "', '" . $name . ".pdf', '" . $dataTime . "')");
-		// Store uploaded image and document file
-		move_uploaded_file($_FILES['image']['tmp_name'], $target_img_file);
-		move_uploaded_file($_FILES['document']['tmp_name'], $target_doc_file);
+		$insert = $db->query("INSERT into client_data (rollno, image, signature, document, created) VALUES (" . $roll_no . ", '" . $name . "." . $img_ftype . "', '" . $name . "." . $signature_ftype . "', '" . $name . ".pdf', '" . $dataTime . "')");
 
 		if($insert){
+			// Store uploaded image, signature and document file
+			move_uploaded_file($_FILES['image']['tmp_name'], $target_img_file);
+			move_uploaded_file($_FILES['signature']['tmp_name'], $target_signature_file);
+			move_uploaded_file($_FILES['document']['tmp_name'], $target_doc_file);
 			echo '<div class="alert alert-success"><strong>Success!</strong> Your response has been recorded. </div>';
 		}else{
 			echo '<div class="alert alert-danger"><strong>Something went wrong!</strong> Your response cannot be recorded. </div>';
@@ -87,8 +106,13 @@ echo '<input type="number" name="rollno" id="rollno" class="form-control" placeh
 echo '</div>';
 
 echo '<div class="form-group">';
-echo '<label for="image">Image:</label>';
+echo '<label for="image">Image (' . $min_img_width . '&times;' . $min_img_height . 'px to ' . $max_img_width . '&times;' . $max_img_height . 'px):</label>';
 echo '<input type="file" name="image" id="image" class="form-control" accept="image/png, image/jpeg" required>';
+echo '</div>';
+
+echo '<div class="form-group">';
+echo '<label for="signature">Signature (' . $min_signature_width . '&times;' . $min_signature_height . 'px to ' . $max_signature_width . '&times;' . $max_signature_height . 'px):</label>';
+echo '<input type="file" name="signature" id="signature" class="form-control" accept="image/png, image/jpeg" required>';
 echo '</div>';
 
 echo '<div class="form-group">';
