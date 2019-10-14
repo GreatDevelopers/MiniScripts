@@ -69,6 +69,14 @@ if(isset($_POST['submit'])) {
 
 		$dataTime = date("Y-m-d H:i:s");
 
+		// Check if data exists for user
+		// And modify backup=0 to max(backup) + 1 if value exists
+		$backup_check = $db->query("SELECT backup from client_data where rollno=" . $roll_no);
+		if ($backup_check->num_rows) {
+			$max_backup = max($backup_check->fetch_all())[0];
+			$db->query("UPDATE client_data SET backup=" . strval(intval($max_backup) + 1) . " WHERE rollno=" . $roll_no . " and backup=0");
+		}
+
 		$insert = $db->query("INSERT into client_data (rollno, image, signature, document, created) VALUES (" . $roll_no . ", '" . $target_img_file_name . "', '" . $target_signature_file_name . "', '" . $target_doc_file_name . "', '" . $dataTime . "')");
 
 		if($insert){
