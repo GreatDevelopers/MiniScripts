@@ -10,7 +10,8 @@
 	$target_doc_dir = "uploads/documents/";
 
 	// Maximum image and document size in bytes
-	$max_img_size = 50000; // 50 Kb
+	$max_img_size = 100000; // 100 Kb
+	$max_signature_size = 50000; // 50 Kb
 	$max_doc_size = 300000; // 300 Kb
 
 	// Width and height constraints of image and signature in pixels

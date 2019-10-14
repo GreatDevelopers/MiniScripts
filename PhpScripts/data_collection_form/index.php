@@ -14,6 +14,12 @@ if(isset($_POST['submit'])) {
 			goto DataForm;
 		}
 
+		// Check signature size
+		if(($_FILES['signature']['size'] >= $max_signature_size) || ($_FILES["signature"]["size"] == 0)) {
+			echo '<div class="alert alert-danger"><strong>Signature file size too large!</strong> Signature must be less than ' . $max_signature_size/1000 . ' KB.</div>';
+			goto DataForm;
+		}
+
 		$image_width = getimagesize($_FILES["image"]["tmp_name"])[0];
 		$image_height = getimagesize($_FILES["image"]["tmp_name"])[1];
 		// Check image height and width constraints
