@@ -51,12 +51,15 @@ if(isset($_POST['submit'])) {
 		}
 
 		$roll_no = $_POST['rollno'];
-		$name = rand() . $roll_no;
-		$img_ftype=str_replace("image/", "", $_FILES['image']['type']);
-		$target_img_file = $target_img_dir . $name . "." . $img_ftype;
-		$signature_ftype=str_replace("image/", "", $_FILES['signature']['type']);
-		$target_signature_file = $target_signature_dir . $name . "." . $signature_ftype;
-		$target_doc_file = $target_doc_dir . $name . ".pdf";
+		$random_hash = sha1(rand());
+		$img_ftype = str_replace("image/", "", $_FILES['image']['type']);
+		$target_img_file_name = $roll_no . "i" . $random_hash . "." . $img_ftype;
+		$target_img_file = $target_img_dir . $target_img_file_name;
+		$signature_ftype = str_replace("image/", "", $_FILES['signature']['type']);
+		$target_signature_file_name = $roll_no . "s" . $random_hash . "." . $signature_ftype;
+		$target_signature_file = $target_signature_dir . $target_signature_file_name;
+		$target_doc_file_name = $roll_no . "d" . $random_hash . ".pdf";
+		$target_doc_file = $target_doc_dir . $target_doc_file_name;
 
 		$db = new mysqli($dbHost, $dbUsername, $dbPassword, $dbName);
 		if($db->connect_error){
