@@ -109,12 +109,17 @@ echo '<script src="bootstrap/popper.min.js"></script>';
 echo '';
 echo '<!-- Latest compiled JavaScript -->';
 echo '<script src="bootstrap/bootstrap.min.js"></script>	';
+echo '';
+echo '<!-- Display image and signature-->';
+echo '<script type="text/javascript" src="image_preview.js"></script>';
 echo '</head>';
 
 echo '<body>';
 
 echo '<div class="container">';
-echo '<h2 align="center">Enter your data</h2>';
+echo '<div class="row">';
+echo '<div class="col">';
+echo '<h2 align="center" style="padding-top:15px">Enter your data</h2>';
 echo '<form action="" method="post" enctype="multipart/form-data">';
 
 echo '<div class="form-group">';
@@ -124,12 +129,12 @@ echo '</div>';
 
 echo '<div class="form-group">';
 echo '<label for="image">Image (' . $min_img_width . '&times;' . $min_img_height . 'px to ' . $max_img_width . '&times;' . $max_img_height . 'px):</label>';
-echo '<input type="file" name="image" id="image" class="form-control" accept="image/png, image/jpeg" required>';
+echo '<input type="file" name="image" id="image" class="form-control" accept="image/png, image/jpeg" onchange="displayImage(event, output_image)" required>';
 echo '</div>';
 
 echo '<div class="form-group">';
 echo '<label for="signature">Signature (' . $min_signature_width . '&times;' . $min_signature_height . 'px to ' . $max_signature_width . '&times;' . $max_signature_height . 'px):</label>';
-echo '<input type="file" name="signature" id="signature" class="form-control" accept="image/png, image/jpeg" required>';
+echo '<input type="file" name="signature" id="signature" class="form-control" accept="image/png, image/jpeg" onchange="displayImage(event, output_signature)" required>';
 echo '</div>';
 
 echo '<div class="form-group">';
@@ -140,7 +145,14 @@ echo '</div>';
 echo '<input type="submit" name="submit" value="Submit" class="btn btn-primary">';
 
 echo '</form>';
+echo '</div>';
 
+echo '<div class="col-xs-6" style="padding:15px">';
+echo '<img id="output_image" width="250" src="uploads/images/example.png"/><br><br>';
+echo '<img id="output_signature" width="200" src="uploads/signatures/example.png"/>';
+echo '</div>';
+
+echo '</div>';
 echo '</div>';
 echo '</body>';
 echo '</html>';
