@@ -69,7 +69,7 @@ if(isset($_POST['submit'])) {
 
 		$dataTime = date("Y-m-d H:i:s");
 
-		$insert = $db->query("INSERT into client_data (rollno, image, signature, document, created) VALUES (" . $roll_no . ", '" . $name . "." . $img_ftype . "', '" . $name . "." . $signature_ftype . "', '" . $name . ".pdf', '" . $dataTime . "')");
+		$insert = $db->query("INSERT into client_data (rollno, image, signature, document, created) VALUES (" . $roll_no . ", '" . $target_img_file_name . "', '" . $target_signature_file_name . "', '" . $target_doc_file_name . "', '" . $dataTime . "')");
 
 		if($insert){
 			// Store uploaded image, signature and document file
