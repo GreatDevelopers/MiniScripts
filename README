@@ -27,6 +27,8 @@ Directories are structured with respect to programming/script languages.
 | |____tree.sh # Tree command in shell script
 | |
 | |____JavaOnTermux.sh # To run Java program on Android in Termux
+| |
+| |____sendmail.sh # Send mail when load on server is high
 | 
 |____EmacsConf #Emacs Configuration
 |
