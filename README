@@ -5,6 +5,8 @@ Directories are structured with respect to programming/script languages.
 |____RubyScripts # Contains Ruby Scripts
 |
 |____PythonScripts # Python Scripts
+| |
+| |__RemoveRedColor # Python script to remove red color from image
 |
 |____VimConf #Vim Configuration
 |
