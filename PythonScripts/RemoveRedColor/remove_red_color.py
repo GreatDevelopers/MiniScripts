@@ -10,12 +10,12 @@ def remove_red_color(input_image):
     hsv_img = cv2.cvtColor(input_img, cv2.COLOR_BGR2HSV)
 
     # Range for lower red
-    lower_red = np.array([0, 20, 70])
+    lower_red = np.array([0, 20, 60])
     upper_red = np.array([10, 150, 255])
     mask1 = cv2.inRange(hsv_img, lower_red, upper_red)
 
     # Range for upper red
-    lower_red = np.array([160, 10, 70])
+    lower_red = np.array([155, 10, 60])
     upper_red = np.array([180, 150, 255])
     mask2 = cv2.inRange(hsv_img, lower_red, upper_red)
 
@@ -42,6 +42,7 @@ def remove_red_color(input_image):
     res = cv2.bitwise_or(res1, res2)
 
     # Save output file
+    res = res[:, :, 2]
     output_file = input_image.split("/")[-1].split(".")[0] + "_output.png"
     cv2.imwrite(output_file, res)
 
