@@ -41,8 +41,10 @@ def remove_red_color(input_image):
     # Add result1 and result2
     res = cv2.bitwise_or(res1, res2)
 
-    # Save output file
+    # Set red component to 2 in image
     res = res[:, :, 2]
+
+    # Save output file
     output_file = input_image.split("/")[-1].split(".")[0] + "_output.png"
     cv2.imwrite(output_file, res)
 
