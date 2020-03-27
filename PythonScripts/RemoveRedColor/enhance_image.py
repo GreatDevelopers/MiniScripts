@@ -37,10 +37,10 @@ def enhance_image(input_image):
     denoised_img = cv2.fastNlMeansDenoising(less_black_img, 11, 31, 9)
 
     # Apply Gaussian blur to image to make text smooth
-    blur_img = cv2.GaussianBlur(denoised_img,(3,3),0)
+    blur_img = cv2.GaussianBlur(denoised_img, (3, 3), 0)
 
     # Save output file
-    cv2.imwrite(input_image, blur_img)
+    cv2.imwrite(input_image, cv2.cvtColor(blur_img, cv2.COLOR_BGR2GRAY))
 
     return input_image
 
