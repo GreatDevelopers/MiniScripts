@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 
-def remove_red_color(input_image):
+def remove_red_color(input_image, black_and_white_image):
     # Read input image file
     input_img = cv2.imread(input_image, cv2.IMREAD_COLOR)
 
@@ -28,7 +28,7 @@ def remove_red_color(input_image):
 
     # To be used as replacement of red color
     white_image = np.zeros(input_img.shape, np.uint8)
-    white_image[:] = (193, 189, 188)
+    white_image[:] = (255, 255, 255)
 
     # Remove part of white image corresponding to which there is no red color in
     # input image
@@ -36,13 +36,19 @@ def remove_red_color(input_image):
 
     # Remove part of input image containing red color
     mask = cv2.bitwise_not(mask)
-    res2 = cv2.bitwise_or(input_img, input_img, mask=mask)
+
+    # Apply mask on black and white image
+    black_and_white_img = cv2.imread(black_and_white_image, cv2.IMREAD_COLOR)
+    res2 = cv2.bitwise_or(black_and_white_img, black_and_white_img, mask=mask)
 
     # Add result1 and result2
     res = cv2.bitwise_or(res1, res2)
 
     # Set red component to 2 in image
     res = res[:, :, 2]
+
+    # Apply denoisation on image
+    # res = cv2.fastNlMeansDenoising(res, 11, 31, 9)
 
     # Save output file
     output_file = input_image.split("/")[-1].split(".")[0] + "_output.png"
@@ -54,9 +60,11 @@ def remove_red_color(input_image):
 if __name__ == "__main__":
     import sys
 
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
         input_image = sys.argv[1]
+        black_and_white_image = sys.argv[2]
     else:
         input_image = input("Enter image path: ")
-    output_file = remove_red_color(input_image)
+        black_and_white_image = input("Enter black_and_white_image path: ")
+    output_file = remove_red_color(input_image, black_and_white_image)
     print("Output file is saved as:", output_file)
