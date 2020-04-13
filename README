@@ -7,6 +7,8 @@ Directories are structured with respect to programming/script languages.
 |____PythonScripts # Python Scripts
 | |
 | |__RemoveRedColor # Python script to remove red color from image
+| |
+| |__TemplateFilling # Sript to fill template reading data from csv file
 |
 |____VimConf #Vim Configuration
 |

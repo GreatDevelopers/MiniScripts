@@ -1,0 +1,23 @@
+Date: 13-04-2020  No. N
+
+To
+
+F M LastName
+501L
+City
+
+Dear F M LastName,
+
+Greeating of the day,
+
+We have processed your application, and you have been
+alloted 999999 as your Class Roll No.
+
+Same information has been sent on foo@domain.net and as SMS
+on 8340100000.
+
+Please acknowledge the receipt of this letter.
+
+Yours truly,
+
+Registrar
