@@ -21,8 +21,7 @@ cat "$temp_file" | \
   sed 's/\x1B\[?2004[hl]//g' | \
   tr -d '\r' | \
   col -b | \
-  sed '/^$/N;/^\n$/D' | \
-  fold -w 72 > MyLog.txt
+  sed '/^$/N;/^\n$/D' > MyLog.txt
 
 # Remove the temporary file
 rm "$temp_file"
