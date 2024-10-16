@@ -1,0 +1,28 @@
+#!/bin/bash
+# To run: sh ShareInternetWiFi2Ethernet3.sh 
+# Enable IP forwarding
+echo "Enabling IP forwarding..."
+sudo sysctl -w net.ipv4.ip_forward=1
+
+# Set up NAT (Masquerading) for the WiFi interface
+echo "Configuring iptables for NAT (Masquerading)..."
+sudo iptables -t nat -A POSTROUTING -o wlp0s20f3 -j MASQUERADE
+
+# Allow forwarding from Ethernet to WiFi
+echo "Allowing forwarding from Ethernet to WiFi..."
+sudo iptables -A FORWARD -i eno1 -o wlp0s20f3 -j ACCEPT
+sudo iptables -A FORWARD -i wlp0s20f3 -o eno1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# Assign static IP to Ethernet interface (eno1)
+echo "Assigning static IP to Ethernet interface..."
+sudo nmcli connection modify eno1 ipv4.addresses "192.168.1.1/24" ipv4.method manual
+
+# Bring up the Ethernet interface
+echo "Bringing up the Ethernet interface..."
+sudo nmcli connection up eno1
+
+# Restart NetworkManager to ensure settings are applied after reboot
+echo "Restarting NetworkManager..."
+sudo systemctl restart NetworkManager
+
+echo "WiFi sharing via Ethernet setup complete."
